@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:trainig/model/bookGetter.dart';
@@ -67,14 +69,17 @@ class prov with ChangeNotifier {
     try {
       Response response = await post(
           Uri.parse("https://api.joa-orthopedic.com/en-US/api/Auth/Login"),
-          body: {
+          body: jsonEncode({
             "username": username,
             "password": password,
             "deviceToken": "string",
             "platform": "string",
             "version": "string",
             "language": "string",
-            "role": "string"
+            "role": 1
+          }),
+          headers: {
+            'Content-Type': 'application/json',
           });
       if (response.statusCode == 200) {
         print("Successfully");
